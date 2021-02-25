@@ -5,6 +5,19 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ /* *{
+   border: 1px solid red;
+ } */
+
+ .position-right {
+   right: 35%;
+ }
+.hidden {
+  display: none;
+}
+ .position-left {
+  left: 35%;
+}
 :root {
   --blue: blue;
   --indigo: indigo;

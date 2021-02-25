@@ -14,6 +14,7 @@ class SongsService {
     $.getJSON(url)
       .then(res => {
         ProxyState.songs = res.results.map(rawData => new Song(rawData));
+        console.log(res.results)
       })
       .catch(err => {
         throw new Error(err);
@@ -27,14 +28,39 @@ class SongsService {
     //TODO What are you going to do with this result
   }
 
+  setActiveSong(trackId) {
+    console.log(trackId)
+    let currentTrack = ProxyState.songs.find(s => s._id == trackId)
+    console.log("Current track:",currentTrack)
+    if(!currentTrack) {
+      return;
+    }
+    ProxyState.activeSong = new Song(currentTrack)
+
+  }
+
   /**
    * Takes in a song id and sends it from the search results to the sandbox to be saved.
    * Afterwords it will update the store to reflect saved info
    * @param {string} id
    */
-  addSong(id) {
+  async addSong(id) {
     //TODO you only have an id, you will need to find it in the store before you can post it
     //TODO After posting it what should you do?
+
+    console.log(ProxyState.activeSong._id)
+    
+    try {
+      delete ProxyState.activeSong._id
+      let res = await sandBoxApi.post("",ProxyState.activeSong)
+      console.log(res)
+      
+      ProxyState.playlist = [...ProxyState.playlist, new Song(res.data)]
+      
+      console.log("hey")
+    }catch(err) {
+      console.error(err)
+    }
   }
 
   /**

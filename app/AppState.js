@@ -6,6 +6,9 @@ class AppState extends EventEmitter {
   /** Collection of Songs from search Results
    * @type {Song[]} */
   songs = []
+
+  /**@type {Song} */
+  activeSong = null
   /**Collection of songs from the users Playlist
    * @type {Song[]} */
   playlist = []
